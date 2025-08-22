@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UBB Sevens — Rugby à 7 Bordeaux-Bègles</title>
+  <meta name="description" content="Découvrez l'univers électrisant du rugby à 7 version UBB : actualités, équipe, matchs, boutique, académie et expériences fans.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bordeaux:#5a0a2e;
+      --bordeaux-deep:#3e0721;
+      --marine:#1b1f33;
+      --rose:#eec0d9;
+      --or:#f2c94c;
+      --crème:#faf6f2;
+      --vert:#21d19f;
+    }
+    html,body{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Apple Color Emoji,Segoe UI Emoji}
+    h1,h2,h3,.font-display{font-family:Montserrat,Inter,sans-serif}
+    /* Gradient text utility */
+    .text-gradient{background:linear-gradient(90deg,var(--or),#ff7ab6,var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .text-ubb{background:linear-gradient(120deg,var(--bordeaux),var(--marine));-webkit-background-clip:text;background-clip:text;color:transparent}
+    /* Soft noise background */
+    .noise:before{
+      content:"";
+      position:absolute;inset:0;
+      background-image:url('https://placehold.co/10x10/000000/000000.png?text=+');
+      opacity:.03;pointer-events:none;mix-blend:overlay
+    }
+    /* Grid shine animation */
+    .shine{
+      position:relative;
+      overflow:hidden
+    }
+    .shine:after{
+      content:"";
+      position:absolute;
+      top:-150%;left:-50%;
+      width:60%;height:400%;
+      transform:rotate(20deg);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+      animation:shine 7s linear infinite;
+    }
+    @keyframes shine{
+      0%{transform:translateX(-120%) rotate(20deg)}
+      100%{transform:translateX(220%) rotate(20deg)}
+    }
+    /* Floating chips */
+    .floaty{animation:floaty 6s ease-in-out infinite}
+    @keyframes floaty{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+    /* Appear on scroll */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+    /* Magnetic buttons hover */
+    .magnet{transition:transform .15s ease}
+    /* Marquee */
+    .marquee{display:flex;gap:2rem;white-space:nowrap;animation:marquee 22s linear infinite}
+    @keyframes marquee{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+    /* Card hover lift */
+    .lift{transition:transform .3s ease, box-shadow .3s ease}
+    .lift:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.15)}
+    /* Section divider curve */
+    .curve-top{position:relative}
+    .curve-top:before{
+      content:"";position:absolute;left:0;right:0;top:-40px;height:40px;
+      background:radial-gradient(100% 40px at 50% 0, rgba(0,0,0,.2), transparent 70%);
+      opacity:.15
+    }
+    /* Timeline */
+    .timeline:before{
+      content:"";position:absolute;left:1.25rem;top:0;bottom:0;width:3px;background:linear-gradient(var(--rose),var(--or))
+    }
+    .dot{
+      width:14px;height:14px;border-radius:50%;
+      background:linear-gradient(135deg,var(--or),#ff9d5c);
+      box-shadow:0 0 0 6px rgba(242,201,76,.15)
+    }
+    /* Badge glow */
+    .badge-glow{
+      box-shadow:0 0 0 6px rgba(234,179,199,.25), inset 0 0 0 2px rgba(255,255,255,.3)
+    }
+    /* Glass */
+    .glass{backdrop-filter:blur(10px);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)}
+    /* Tooltip */
+    .tooltip{position:relative}
+    .tooltip:hover:after{
+      content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);
+      background:#0f0f15;color:#fff;padding:.35rem .55rem;border-radius:.5rem;font-size:.75rem;white-space:nowrap;box-shadow:0 10px 20px rgba(0,0,0,.25)
+    }
+    /* Responsive tweaks for hero */
+    @media (max-width: 768px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body class="antialiased bg-[var(--crème)] text-[var(--marine)] selection:bg-[var(--bordeaux)]/80 selection:text-white">
+  <!-- Top Bar -->
+  <div class="w-full bg-[var(--bordeaux-deep)] text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-2 text-rose-100"><i class="fa fa-bolt text-yellow-300"></i> Saison 2025 — UBB Sevens</span>
+        <span class="hidden md:inline-block text-white/70">Passion, vitesse et panache bordelais</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#billetterie" class="px-3 py-1 rounded-full bg-yellow-400 text-[var(--marine)] font-semibold hover:bg-yellow-300 transition">Billetterie</a>
+        <a href="#live" class="hidden sm:flex items-center gap-2 text-white/80 hover:text-white transition"><i class="fa fa-circle text-green-400"></i> Live</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-black/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--bordeaux)] to-[var(--marine)] flex items-center justify-center text-white font-extrabold text-lg shine">7</div>
+        <div class="leading-tight">
+          <div class="font-extrabold text-[var(--bordeaux)] group-hover:text-[var(--marine)] transition">UBB Sevens</div>
+          <div class="text-xs text-[var(--marine)]/60 -mt-0.5">Rugby à 7 Bordeaux-Bègles</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 font-semibold text-sm">
+        <a href="#hero" class="hover:text-[var(--bordeaux)] transition">Accueil</a>
+        <a href="#actus" class="hover:text-[var(--bordeaux)] transition">Actus</a>
+        <a href="#equipe" class="hover:text-[var(--bordeaux)] transition">Équipe</a>
+        <a href="#matchs" class="hover:text-[var(--bordeaux)] transition">Matchs</a>
+        <a href="#academie" class="hover:text-[var(--bordeaux)] transition">Académie</a>
+        <a href="#boutique" class="hover:text-[var(--bordeaux)] transition">Boutique</a>
+        <a href="#club" class="hover:text-[var(--bordeaux)] transition">Le Club</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="#newsletter" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--marine)] text-white hover:bg-[var(--bordeaux)] transition magnet"><i class="fa fa-paper-plane"></i> S'abonner</a>
+        <button id="menuBtn" class="md:hidden w-10 h-10 rounded-xl bg-white shadow flex items-center justify-center"><i class="fa fa-bars text-[var(--marine)]"></i></button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4">
+      <div class="grid grid-cols-2 gap-3">
+        <a href="#hero" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Accueil</a>
+        <a href="#actus" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Actus</a>
+        <a href="#equipe" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Équipe</a>
+        <a href="#matchs" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Matchs</a>
+        <a href="#academie" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Académie</a>
+        <a href="#boutique" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Boutique</a>
+        <a href="#club" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Le Club</a>
+        <a href="#contact" class="p-3 rounded-xl bg-white shadow hover:shadow-md transition">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative overflow-hidden bg-gradient-to-br from-[var(--crème)] via-white to-[#fff9f6]">
+  <div class="absolute -top-24 -left-24 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full bg-[var(--rose)] blur-3xl opacity-30 sm:opacity-40 pointer-events-none"></div>
+  <div class="absolute -bottom-24 -right-24 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full bg-[var(--bordeaux)] blur-3xl opacity-15 sm:opacity-20 pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-16 sm:pb-24 relative">
+    <div class="grid hero-grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+      <div class="order-2 lg:order-1 reveal">
+        <div class="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-xs sm:text-sm font-semibold badge-glow">
+          <i class="fa fa-fire text-yellow-400"></i> Saison 2025 — Nouvelle ère Sevens
+        </div>
+        <h1 class="mt-4 sm:mt-5 text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+          <span class="text-ubb">Explosivité. Créativité. Bordeaux.</span><br class="hidden sm:block">
+          <span class="text-gradient">Vivez l'UBB Sevens en grand</span>
+        </h1>
+        <p class="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-[var(--marine)]/70 max-w-2xl">
+          Rugby à 7 version UBB : des actions à couper le souffle, une identité forte, et une tribune en fusion. Rejoignez la vague bordeaux et marine.
+        </p>
+        <div class="mt-6 sm:mt-8 flex flex-col xs:flex-row sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
+          <a href="#billetterie" class="group relative inline-flex justify-center items-center gap-3 px-5 sm:px-6 py-3 rounded-2xl text-white text-sm sm:text-base font-semibold bg-gradient-to-r from-[var(--bordeaux)] to-[var(--marine)] hover:opacity-95 transition magnet">
+            <i class="fa fa-ticket-alt text-yellow-300 group-hover:rotate-12 transition"></i>
+            Réserver mes places
+            <span class="absolute inset-0 rounded-2xl shine"></span>
+          </a>
+          <a href="#video" class="inline-flex justify-center items-center gap-3 px-5 py-3 rounded-2xl bg-white text-[var(--marine)] text-sm sm:text-base font-semibold border border-black/5 hover:border-[var(--bordeaux)]/30 hover:shadow transition">
+            <i class="fa fa-play-circle text-[var(--bordeaux)]"></i> Voir le teaser
+          </a>
+          <div class="flex items-center gap-3 text-xs sm:text-sm text-[var(--marine)]/70">
+            <i class="fa fa-shield-alt text-[var(--bordeaux)]"></i> Accès garanti • E-tickets instantanés
+          </div>
+        </div>
+        <div class="mt-8 sm:mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-xl">
+          <div class="p-3 sm:p-4 rounded-2xl bg-white border border-black/5 lift">
+            <div class="text-xl sm:text-2xl font-extrabold text-[var(--bordeaux)]">7</div>
+            <div class="text-[10px] sm:text-sm text-[var(--marine)]/60">Joueurs, talent multiplié</div>
+          </div>
+          <div class="p-3 sm:p-4 rounded-2xl bg-white border border-black/5 lift">
+            <div class="text-xl sm:text-2xl font-extrabold text-[var(--bordeaux)]">14'</div>
+            <div class="text-[10px] sm:text-sm text-[var(--marine)]/60">D'intensité totale</div>
+          </div>
+          <div class="p-3 sm:p-4 rounded-2xl bg-white border border-black/5 lift">
+            <div class="text-xl sm:text-2xl font-extrabold text-[var(--bordeaux)]">100%</div>
+            <div class="text-[10px] sm:text-sm text-[var(--marine)]/60">Spectacle UBB</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2 relative reveal">
+        <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-black/5 shadow-xl bg-white">
+          <img src="https://placehold.co/800x560/b50e4a/ffffff?text=UBB+Sevens+Action" alt="UBB Sevens en action" class="w-full h-auto object-cover">
+          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-black/60 to-transparent text-white">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+              <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs rounded-full bg-yellow-400 text-black font-bold">Highlight</span>
+              <span class="text-xs sm:text-sm text-white/80">Try de 90m • Finale Atlantique</span>
+            </div>
+          </div>
+        </div>
+        <div class="absolute left-2 top-2 sm:-left-6 sm:-top-6 floaty">
+          <div class="px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl bg-white border border-black/5 shadow flex items-center gap-2 sm:gap-3">
+            <i class="fa fa-bolt text-yellow-400"></i>
+            <div>
+              <div class="text-xs sm:text-sm font-bold">Rythme effréné</div>
+              <div class="text-[10px] sm:text-xs text-[var(--marine)]/60">7 secondes pour décider</div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute right-2 bottom-2 sm:-right-6 sm:-bottom-6 floaty" style="animation-delay:1s">
+          <div class="px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl bg-[var(--bordeaux)] text-white shadow-lg">
+            <div class="text-[10px] sm:text-xs uppercase tracking-wide text-white/70">Soutien</div>
+            <div class="text-sm sm:text-lg font-bold">12 500 fans</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 sm:mt-14 overflow-hidden border-y border-black/5 py-2.5 sm:py-3">
+      <div class="marquee text-xs sm:text-sm text-[var(--marine)]/60 font-semibold">
+        <span class="inline-flex items-center gap-2 mr-6 sm:mr-10"><i class="fa fa-trophy text-yellow-400"></i> Circuit Elite 2025</span>
+        <span class="inline-flex items-center gap-2 mr-6 sm:mr-10"><i class="fa fa-map-marker-alt text-[var(--bordeaux)]"></i> Bordeaux • Bègles • Atlantique</span>
+        <span class="inline-flex items-center gap-2 mr-6 sm:mr-10"><i class="fa fa-meteor text-rose-500"></i> Offloads magiques</span>
+        <span class="inline-flex items-center gap-2 mr-6 sm:mr-10"><i class="fa fa-heart text-rose-400"></i> Esprit UBB</span>
+        <span class="inline-flex items-center gap-2 mr-6 sm:mr-10"><i class="fa fa-trophy text-yellow-400"></i> Circuit Elite 2025</span>
+        <span class="inline-flex items-center gap-2 mr-6 sm:mr-10"><i class="fa fa-map-marker-alt text-[var(--bordeaux)]"></i> Bordeaux • Bègles • Atlantique</span>
+        <span class="inline-flex items-center gap-2 mr-6 sm:mr-10"><i class="fa fa-meteor text-rose-500"></i> Offloads magiques</span>
+        <span class="inline-flex items-center gap-2"><i class="fa fa-heart text-rose-400"></i> Esprit UBB</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Actus Section -->
+  <section id="actus" class="relative py-20 curve-top">
+    <div class="absolute inset-0 bg-gradient-to-b from-white to-[#fff4f8] -z-10"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end sm:justify-between gap-6">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">Dernières actualités</h2>
+          <p class="text-[var(--marine)]/70 mt-2 max-w-2xl">Les infos brûlantes, les annonces officielles et les coulisses du groupe Sevens.</p>
+        </div>
+        <a href="#" class="inline-flex items-center gap-2 text-[var(--bordeaux)] font-semibold hover:gap-3 transition">
+          Voir toutes les actus <i class="fa fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <article class="rounded-3xl overflow-hidden bg-white border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x420/261a2d/ffffff?text=Stage+Altitude+Pyrénées" alt="Stage altitude Pyrénées" class="w-full h-auto object-cover">
+            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white text-[var(--bordeaux)] text-xs font-bold">Prépa</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-extrabold text-xl">Stage en altitude: cap sur l'explosivité</h3>
+            <p class="text-[var(--marine)]/70 mt-2">Une semaine intense dans les Pyrénées pour travailler la vitesse, le cardio et la cohésion. Résultats déjà visibles à l'entraînement.</p>
+            <div class="mt-4 flex items-center justify-between text-sm text-[var(--marine)]/60">
+              <span><i class="fa fa-calendar"></i> 12 fév. 2025</span>
+              <a href="#" class="text-[var(--bordeaux)] font-semibold hover:underline">Lire</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl overflow-hidden bg-white border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x420/5a0a2e/ffffff?text=Signature+X.+Dupont" alt="Signature nouvelle recrue" class="w-full h-auto object-cover">
+            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white text-[var(--bordeaux)] text-xs font-bold">Transfert</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-extrabold text-xl">UBB Sevens signe un finisseur de classe mondiale</h3>
+            <p class="text-[var(--marine)]/70 mt-2">Fin de série sur le marché: un ailier rapide et créatif rejoint l'effectif pour dynamiter les fins de matchs.</p>
+            <div class="mt-4 flex items-center justify-between text-sm text-[var(--marine)]/60">
+              <span><i class="fa fa-calendar"></i> 28 janv. 2025</span>
+              <a href="#" class="text-[var(--bordeaux)] font-semibold hover:underline">Lire</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl overflow-hidden bg-white border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x420/1b1f33/ffffff?text=Tournoi+Atlantique" alt="Tournoi Atlantique" class="w-full h-auto object-cover">
+            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white text-[var(--bordeaux)] text-xs font-bold">Événement</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-extrabold text-xl">Grand retour du Tournoi Atlantique à Bordeaux</h3>
+            <p class="text-[var(--marine)]/70 mt-2">Les meilleures équipes européennes viennent défier l'UBB Sevens au Matmut Atlantique. Billetterie ouverte.</p>
+            <div class="mt-4 flex items-center justify-between text-sm text-[var(--marine)]/60">
+              <span><i class="fa fa-calendar"></i> 4 mars 2025</span>
+              <a href="#billetterie" class="text-[var(--bordeaux)] font-semibold hover:underline">Billets</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Équipe Section -->
+  <section id="equipe" class="relative py-20 bg-gradient-to-br from-[#fff4f8] to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">L'Équipe UBB Sevens</h2>
+          <p class="text-[var(--marine)]/70 mt-2">Vitesse, vision, soutien: nos 7 fantastiques et impact players.</p>
+        </div>
+        <div class="hidden md:flex items-center gap-2 text-sm text-[var(--marine)]/60">
+          <i class="fa fa-info-circle"></i> Effectif susceptible d'évoluer
+        </div>
+      </div>
+
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Player Card -->
+        <div class="group bg-white rounded-3xl overflow-hidden border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x520/5a0a2e/ffffff?text=Ailier+Finisseur" alt="Joueur UBB Sevens" class="w-full h-auto object-cover">
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-extrabold">Vitesse 95</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-xl">L. Marval</h3>
+              <span class="px-2 py-1 rounded bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-xs font-bold">Ailier</span>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Finish clinique, crochets courts, offloads en bord de touche.</p>
+            <div class="mt-4 grid grid-cols-3 text-center text-sm">
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">9.9</div><div class="text-[var(--marine)]/50">Accel.</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.8</div><div class="text-[var(--marine)]/50">Passe</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.2</div><div class="text-[var(--marine)]/50">Plaq.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl overflow-hidden border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x520/1b1f33/ffffff?text=Demi+de+m%C3%AAl%C3%A9e" alt="Demi de mêlée" class="w-full h-auto object-cover">
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-extrabold">Vision 93</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-xl">N. Beaulieu</h3>
+              <span class="px-2 py-1 rounded bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-xs font-bold">Demi</span>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Chef d'orchestre, gestion du tempo et passes laser à hauteur.</p>
+            <div class="mt-4 grid grid-cols-3 text-center text-sm">
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.9</div><div class="text-[var(--marine)]/50">Kick</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">9.2</div><div class="text-[var(--marine)]/50">Vision</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.7</div><div class="text-[var(--marine)]/50">Piqûre</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl overflow-hidden border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x520/b50e4a/ffffff?text=Pilier+Mobile" alt="Pilier mobile" class="w-full h-auto object-cover">
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-extrabold">Puissance 91</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-xl">S. Faumuina</h3>
+              <span class="px-2 py-1 rounded bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-xs font-bold">Avant</span>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Grattage féroce, percussions franches, soutien constant.</p>
+            <div class="mt-4 grid grid-cols-3 text-center text-sm">
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.6</div><div class="text-[var(--marine)]/50">Ruck</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.3</div><div class="text-[var(--marine)]/50">Vitesse</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">9.1</div><div class="text-[var(--marine)]/50">Impact</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl overflow-hidden border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x520/3f2441/ffffff?text=Centre+Cr%C3%A9atif" alt="Centre créatif" class="w-full h-auto object-cover">
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-extrabold">Créativité 94</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-xl">T. Auzqui</h3>
+              <span class="px-2 py-1 rounded bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-xs font-bold">Centre</span>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Feintes de corps, passes après contact, lecture des micro-espaces.</p>
+            <div class="mt-4 grid grid-cols-3 text-center text-sm">
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">9.0</div><div class="text-[var(--marine)]/50">Offload</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.5</div><div class="text-[var(--marine)]/50">Plaq.</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">9.3</div><div class="text-[var(--marine)]/50">Vision</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl overflow-hidden border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x520/1b1f33/ffffff?text=Arri%C3%A8re+Relance" alt="Arrière relance" class="w-full h-auto object-cover">
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-extrabold">Relance 92</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-xl">E. Castets</h3>
+              <span class="px-2 py-1 rounded bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-xs font-bold">Arrière</span>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Relances assassines, jeu au pied court, couverture intelligente.</p>
+            <div class="mt-4 grid grid-cols-3 text-center text-sm">
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.2</div><div class="text-[var(--marine)]/50">Kick</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">9.1</div><div class="text-[var(--marine)]/50">Agilité</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.4</div><div class="text-[var(--marine)]/50">Plaq.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl overflow-hidden border border-black/5 lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x520/5a0a2e/ffffff?text=Impact+Player" alt="Impact player" class="w-full h-auto object-cover">
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-extrabold">Bench+ 90</div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold text-xl">M. Roldan</h3>
+              <span class="px-2 py-1 rounded bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-xs font-bold">Impact</span>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Entre à haute intensité, brise les lignes en fin de match.</p>
+            <div class="mt-4 grid grid-cols-3 text-center text-sm">
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.8</div><div class="text-[var(--marine)]/50">Impact</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.6</div><div class="text-[var(--marine)]/50">Soutien</div></div>
+              <div class="p-3 rounded-xl bg-[var(--crème)]"><div class="font-extrabold">8.0</div><div class="text-[var(--marine)]/50">Agilité</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staff -->
+      <div class="mt-12 bg-white rounded-3xl border border-black/5 p-6 sm:p-8">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <h3 class="font-extrabold text-2xl text-[var(--bordeaux)]">Staff &amp; Performance</h3>
+          <div class="flex gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)]">Analyse vidéo</span>
+            <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)]">Prépa physique</span>
+            <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)]">Médical</span>
+          </div>
+        </div>
+        <div class="mt-6 grid md:grid-cols-3 gap-6">
+          <div class="flex items-center gap-4 p-4 rounded-2xl bg-[var(--crème)] reveal">
+            <img src="https://placehold.co/96x96/1b1f33/ffffff?text=HC" class="w-16 h-16 rounded-xl object-cover" alt="Head coach">
+            <div>
+              <div class="font-extrabold">J. Delpierre</div>
+              <div class="text-sm text-[var(--marine)]/60">Head Coach • Stratégie haute vitesse</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-2xl bg-[var(--crème)] reveal">
+            <img src="https://placehold.co/96x96/5a0a2e/ffffff?text=PF" class="w-16 h-16 rounded-xl object-cover" alt="Préparateur physique">
+            <div>
+              <div class="font-extrabold">K. Sanz</div>
+              <div class="text-sm text-[var(--marine)]/60">Prépa Physique • Sprint &amp; Plyo</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-4 rounded-2xl bg-[var(--crème)] reveal">
+            <img src="https://placehold.co/96x96/3f2441/ffffff?text=AN" class="w-16 h-16 rounded-xl object-cover" alt="Analyste vidéo">
+            <div>
+              <div class="font-extrabold">M. Rigal</div>
+              <div class="text-sm text-[var(--marine)]/60">Analyste • Décisions en 7s</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Matchs & Billetterie -->
+  <section id="matchs" class="relative py-20 bg-gradient-to-b from-white to-[var(--crème)]">
+    <div class="absolute inset-x-0 -top-10 h-10 bg-gradient-to-b from-black/5 to-transparent opacity-30"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-10 items-start">
+        <!-- Calendrier -->
+        <div class="lg:col-span-2">
+          <div class="flex items-end justify-between">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">Calendrier des tournois</h2>
+              <p class="text-[var(--marine)]/70 mt-2">Suivez nos étapes majeures du circuit Sevens.</p>
+            </div>
+            <a href="#" class="text-sm font-semibold text-[var(--bordeaux)] hover:underline">Exporter <i class="fa fa-download ml-1"></i></a>
+          </div>
+
+          <div class="mt-6 relative rounded-3xl bg-white border border-black/5 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image:linear-gradient(#0000 23px,rgba(0,0,0,.08) 24px),linear-gradient(90deg,#0000 23px,rgba(0,0,0,.08) 24px);background-size:24px 24px;"></div>
+            <div class="divide-y divide-black/5">
+              <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 reveal">
+                <div class="flex items-center gap-4">
+                  <div class="w-14 h-14 rounded-2xl bg-[var(--bordeaux)] text-white font-extrabold flex items-center justify-center">08<br><span class="text-xs font-semibold">MAR</span></div>
+                  <div>
+                    <div class="font-extrabold">Tournoi Atlantique — Bordeaux</div>
+                    <div class="text-sm text-[var(--marine)]/60">Matmut Atlantique • Poules + Finale</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold"><i class="fa fa-check-circle"></i> Confirmé</span>
+                  <a href="#billetterie" class="px-4 py-2 rounded-xl bg-[var(--marine)] text-white hover:bg-[var(--bordeaux)] transition">Billets</a>
+                </div>
+              </div>
+              <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 reveal">
+                <div class="flex items-center gap-4">
+                  <div class="w-14 h-14 rounded-2xl bg-[var(--bordeaux)] text-white font-extrabold flex items-center justify-center">22<br><span class="text-xs font-semibold">MAR</span></div>
+                  <div>
+                    <div class="font-extrabold">Sevens de la Garonne — Toulouse</div>
+                    <div class="text-sm text-[var(--marine)]/60">Stade Ernest-Wallon • Knockout</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-bold"><i class="fa fa-clock"></i> Bientôt</span>
+                  <button class="px-4 py-2 rounded-xl bg-white border border-black/10 hover:border-[var(--bordeaux)]/30 transition">Me prévenir</button>
+                </div>
+              </div>
+              <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 reveal">
+                <div class="flex items-center gap-4">
+                  <div class="w-14 h-14 rounded-2xl bg-[var(--bordeaux)] text-white font-extrabold flex items-center justify-center">05<br><span class="text-xs font-semibold">AVR</span></div>
+                  <div>
+                    <div class="font-extrabold">Riviera Sevens — Nice</div>
+                    <div class="text-sm text-[var(--marine)]/60">Allianz Riviera • Series</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold"><i class="fa fa-exclamation-triangle"></i> Limité</span>
+                  <a href="#billetterie" class="px-4 py-2 rounded-xl bg-[var(--marine)] text-white hover:bg-[var(--bordeaux)] transition">Billets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live ticker -->
+          <div id="live" class="mt-8 rounded-3xl p-5 sm:p-6 bg-[var(--marine)] text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20" style="background-image:radial-gradient(1000px 300px at -20% 120%,#fff,transparent), radial-gradient(600px 200px at 120% -20%,#fff,transparent)"></div>
+            <div class="relative flex flex-wrap items-center gap-3">
+              <span class="px-3 py-1 rounded-full bg-green-400 text-black font-extrabold text-xs"><i class="fa fa-circle"></i> LIVE</span>
+              <div class="font-extrabold">UBB 19 — 14 Paris Sevens</div>
+              <div class="text-white/70 text-sm">2:14 restant • Poule B</div>
+              <button class="ml-auto px-4 py-2 rounded-xl bg-white text-[var(--marine)] hover:opacity-90">Voir le live</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billetterie -->
+        <div id="billetterie" class="lg:sticky lg:top-20">
+          <div class="rounded-3xl border border-black/5 bg-white p-6 sm:p-7 lift">
+            <div class="flex items-center gap-3">
+              <i class="fa fa-ticket-alt text-2xl text-[var(--bordeaux)]"></i>
+              <h3 class="text-2xl font-extrabold text-[var(--bordeaux)]">Billetterie</h3>
+            </div>
+            <p class="mt-2 text-[var(--marine)]/70">Choisissez votre expérience au Matmut: tribunes familles, virages ambiance, premium loges.</p>
+
+            <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+              <button class="p-3 rounded-xl bg-[var(--crème)] hover:bg-rose-50 border border-black/5 text-left">
+                <div class="font-bold">Virage Marine</div>
+                <div class="text-[var(--marine)]/60">Ambiance</div>
+              </button>
+              <button class="p-3 rounded-xl bg-[var(--crème)] hover:bg-rose-50 border border-black/5 text-left">
+                <div class="font-bold">Tribune Familles</div>
+                <div class="text-[var(--marine)]/60">Confort</div>
+              </button>
+              <button class="p-3 rounded-xl bg-[var(--crème)] hover:bg-rose-50 border border-black/5 text-left">
+                <div class="font-bold">Carré UBB</div>
+                <div class="text-[var(--marine)]/60">Premium</div>
+              </button>
+              <button class="p-3 rounded-xl bg-[var(--crème)] hover:bg-rose-50 border border-black/5 text-left">
+                <div class="font-bold">Loges</div>
+                <div class="text-[var(--marine)]/60">Hospitalités</div>
+              </button>
+            </div>
+
+            <div class="mt-6">
+              <label class="block text-sm font-bold text-[var(--marine)]/80">Quantité</label>
+              <div class="mt-2 flex items-center rounded-xl border border-black/10 overflow-hidden">
+                <button id="minus" class="w-10 h-10 hover:bg-[var(--crème)]"><i class="fa fa-minus"></i></button>
+                <input id="qty" class="w-full text-center py-2 outline-none" type="number" value="2" min="1" max="10">
+                <button id="plus" class="w-10 h-10 hover:bg-[var(--crème)]"><i class="fa fa-plus"></i></button>
+              </div>
+              <div class="mt-3 text-sm text-[var(--marine)]/60">Tarif moyen: 18 €</div>
+            </div>
+
+            <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-rose-50 to-yellow-50 border border-black/5">
+              <div class="flex items-center justify-between">
+                <div class="text-sm">
+                  <div class="font-bold">Total estimé</div>
+                  <div id="total" class="text-2xl font-extrabold text-[var(--bordeaux)]">36 €</div>
+                </div>
+                <button class="px-5 py-3 rounded-2xl bg-gradient-to-r from-[var(--bordeaux)] to-[var(--marine)] text-white font-semibold hover:opacity-95">Continuer</button>
+              </div>
+            </div>
+
+            <div class="mt-4 text-xs text-[var(--marine)]/60">
+              E-tickets disponibles immédiatement. Réduction -20% pour groupes scolaires et associations.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vidéo / Teaser -->
+  <section id="video" class="relative py-20 bg-gradient-to-br from-[#fff4f8] to-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] font-semibold">
+            <i class="fa fa-play"></i> Teaser Officiel
+          </div>
+          <h3 class="mt-4 text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">Bordeaux en mode turbo</h3>
+          <p class="mt-3 text-[var(--marine)]/70">Découvrez le teaser de la saison: vitesse, flair, collectif. Montez le son et vibrez avec les marées bordelaises.</p>
+          <ul class="mt-5 space-y-3 text-[var(--marine)]/80">
+            <li class="flex items-center gap-3"><i class="fa fa-check-circle text-green-500"></i> Bande-son originale, battements à 140 bpm</li>
+            <li class="flex items-center gap-3"><i class="fa fa-check-circle text-green-500"></i> Actions captées au drone et caméras bord de terrain</li>
+            <li class="flex items-center gap-3"><i class="fa fa-check-circle text-green-500"></i> Interventions des joueurs clefs et du staff</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="relative rounded-3xl overflow-hidden border border-black/5 lift">
+            <img src="https://placehold.co/960x540/1b1f33/ffffff?text=Cliquer+pour+lancer+le+teaser" alt="Teaser vidéo" class="w-full h-auto object-cover">
+            <button class="absolute inset-0 m-auto w-16 h-16 rounded-full bg-white text-[var(--bordeaux)] flex items-center justify-center text-2xl hover:scale-105 transition"><i class="fa fa-play"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Académie -->
+  <section id="academie" class="relative py-20 bg-gradient-to-b from-white to-[#fff7fb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">Académie UBB Sevens</h2>
+          <p class="text-[var(--marine)]/70 mt-2">Former la prochaine vague: skills, vitesse, prise de décision.</p>
+        </div>
+        <a href="#" class="text-sm font-semibold text-[var(--bordeaux)] hover:underline">Candidater <i class="fa fa-arrow-right ml-1"></i></a>
+      </div>
+
+      <div class="mt-8 grid lg:grid-cols-3 gap-6">
+        <div class="rounded-3xl p-6 bg-white border border-black/5 reveal">
+          <div class="flex items-center gap-3">
+            <i class="fa fa-graduation-cap text-2xl text-[var(--bordeaux)]"></i>
+            <div class="font-extrabold text-xl">Programme Skills</div>
+          </div>
+          <p class="mt-2 text-[var(--marine)]/70">Passe en mouvement, prise d'intervalle, lecture des surnombres, rucks rapides.</p>
+          <ul class="mt-4 space-y-2 text-sm text-[var(--marine)]/70">
+            <li><i class="fa fa-check text-green-500 mr-2"></i> 3 sessions / semaine</li>
+            <li><i class="fa fa-check text-green-500 mr-2"></i> Analyse vidéo personnalisée</li>
+            <li><i class="fa fa-check text-green-500 mr-2"></i> Suivi performance</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl p-6 bg-gradient-to-br from-[var(--bordeaux)] to-[var(--marine)] text-white reveal">
+          <div class="flex items-center gap-3">
+            <i class="fa fa-running text-2xl text-yellow-300"></i>
+            <div class="font-extrabold text-xl">Sprint &amp; Agilité</div>
+          </div>
+          <p class="mt-2 text-white/80">Pliométrie, sprints résistés, décélérations maîtrisées, re-accélérations explosives.</p>
+          <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+            <div class="p-3 rounded-xl glass">
+              <div class="text-2xl font-extrabold text-yellow-300">+12%</div>
+              <div class="text-xs">VMA</div>
+            </div>
+            <div class="p-3 rounded-xl glass">
+              <div class="text-2xl font-extrabold text-yellow-300">-0.18s</div>
+              <div class="text-xs">10m</div>
+            </div>
+            <div class="p-3 rounded-xl glass">
+              <div class="text-2xl font-extrabold text-yellow-300">+9%</div>
+              <div class="text-xs">Agi.</div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-3xl p-6 bg-white border border-black/5 reveal">
+          <div class="flex items-center gap-3">
+            <i class="fa fa-heartbeat text-2xl text-[var(--bordeaux)]"></i>
+            <div class="font-extrabold text-xl">Prévention &amp; Recovery</div>
+          </div>
+          <p class="mt-2 text-[var(--marine)]/70">Échauffements neuromusculaires, mobilité, cryo, monitoring charge interne/externe.</p>
+          <div class="mt-4 flex items-center gap-3 text-sm">
+            <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)]">GPS</span>
+            <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)]">RPE</span>
+            <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)]">Wellness</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inscriptions -->
+      <div class="mt-10 rounded-3xl bg-white border border-black/5 p-6 sm:p-8 grid lg:grid-cols-2 gap-8">
+        <div class="reveal">
+          <h3 class="font-extrabold text-2xl text-[var(--bordeaux)]">Rejoindre l'académie</h3>
+          <p class="text-[var(--marine)]/70 mt-2">Ouvert aux joueurs et joueuses de 16 à 22 ans. Détection trimestrielle.</p>
+          <ul class="mt-4 space-y-2 text-[var(--marine)]/70">
+            <li class="tooltip" data-tip="Vidéo highlight de 2-3 minutes"><i class="fa fa-video mr-2 text-[var(--bordeaux)]"></i> Vidéo highlights</li>
+            <li class="tooltip" data-tip="Tests physiques: 30-15, 10m, COD"><i class="fa fa-dumbbell mr-2 text-[var(--bordeaux)]"></i> Résultats physiques</li>
+            <li class="tooltip" data-tip="Club, poste, disponibilité"><i class="fa fa-user mr-2 text-[var(--bordeaux)]"></i> Profil sportif</li>
+          </ul>
+        </div>
+        <form class="reveal grid grid-cols-1 gap-4">
+          <div>
+            <label class="text-sm font-bold">Nom Prénom</label>
+            <input class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="Votre nom">
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm font-bold">Âge</label>
+              <input type="number" min="12" max="30" class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="18">
+            </div>
+            <div>
+              <label class="text-sm font-bold">Poste</label>
+              <select class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40">
+                <option>Ailier</option>
+                <option>Demi</option>
+                <option>Centre</option>
+                <option>Avant</option>
+                <option>Arrière</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-bold">Email</label>
+            <input type="email" class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="vous@exemple.com">
+          </div>
+          <div>
+            <label class="text-sm font-bold">Lien vidéo</label>
+            <input type="url" class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="https://...">
+          </div>
+          <button class="mt-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[var(--bordeaux)] to-[var(--marine)] text-white font-semibold hover:opacity-95">
+            Envoyer la candidature
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Boutique -->
+  <section id="boutique" class="relative py-20 bg-gradient-to-b from-[#fff7fb] to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">Boutique UBB Sevens</h2>
+          <p class="text-[var(--marine)]/70 mt-2">Portez les couleurs bordeaux et marine avec style.</p>
+        </div>
+        <a href="#" class="text-sm font-semibold text-[var(--bordeaux)] hover:underline">Accéder à la boutique</a>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl bg-white border border-black/5 overflow-hidden lift reveal">
+          <div class="relative">
+            <img src="https://placehold.co/720x560/5a0a2e/ffffff?text=Maillot+Sevens+2025" alt="Maillot 2025" class="w-full h-auto object-cover">
+            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-extrabold">Nouveau</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold">Maillot Officiel 2025</h3>
+              <div class="text-[var(--marine)]/60 font-bold">89 €</div>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Tissu respirant, coupe athlétique, détails dorés. Edition Sevens.</p>
+            <button class="mt-4 w-full px-4 py-3 rounded-xl bg-[var(--marine)] text-white hover:bg-[var(--bordeaux)] transition"><i class="fa fa-shopping-bag mr-2"></i> Ajouter</button>
+          </div>
+        </div>
+
+        <div class="rounded-3xl bg-white border border-black/5 overflow-hidden lift reveal">
+          <img src="https://placehold.co/720x560/1b1f33/ffffff?text=Veste+Travel" alt="Veste Travel" class="w-full h-auto object-cover">
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold">Veste Travel Bordeaux</h3>
+              <div class="text-[var(--marine)]/60 font-bold">69 €</div>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Coupe-vent léger, doublure mesh, marquages UBB Sevens.</p>
+            <button class="mt-4 w-full px-4 py-3 rounded-xl bg-[var(--marine)] text-white hover:bg-[var(--bordeaux)] transition"><i class="fa fa-shopping-bag mr-2"></i> Ajouter</button>
+          </div>
+        </div>
+
+        <div class="rounded-3xl bg-white border border-black/5 overflow-hidden lift reveal">
+          <img src="https://placehold.co/720x560/eec0d9/5a0a2e?text=Écharpe+Marine" alt="Écharpe Marine" class="w-full h-auto object-cover">
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-extrabold">Écharpe Marine &amp; Or</h3>
+              <div class="text-[var(--marine)]/60 font-bold">25 €</div>
+            </div>
+            <p class="text-[var(--marine)]/70 mt-2">Tricot doux, blason brodé, parfaite pour les soirs de match.</p>
+            <button class="mt-4 w-full px-4 py-3 rounded-xl bg-[var(--marine)] text-white hover:bg-[var(--bordeaux)] transition"><i class="fa fa-shopping-bag mr-2"></i> Ajouter</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 rounded-3xl p-6 bg-gradient-to-r from-rose-50 to-yellow-50 border border-black/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <i class="fa fa-gift text-[var(--bordeaux)] text-2xl"></i>
+          <div>
+            <div class="font-extrabold">Pack Fans — -15%</div>
+            <div class="text-[var(--marine)]/70 text-sm">Maillot + écharpe + stickers officiels</div>
+          </div>
+        </div>
+        <a href="#" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-[var(--bordeaux)] to-[var(--marine)] text-white font-semibold hover:opacity-95">Profiter de l'offre</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Le Club / Valeurs -->
+  <section id="club" class="relative py-20 bg-gradient-to-br from-white to-[#fff5f7]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div class="reveal">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">Notre identité</h2>
+          <p class="text-[var(--marine)]/70 mt-2">UBB Sevens, c'est l'audace de Bordeaux, l'âme de Bègles et la rigueur d'un club format Champions.</p>
+
+          <div class="mt-6 relative pl-10 timeline">
+            <div class="space-y-6 relative">
+              <div class="relative">
+                <div class="absolute -left-[34px] top-1 dot"></div>
+                <h4 class="font-extrabold">2019 — Premiers pas Sevens</h4>
+                <p class="text-[var(--marine)]/70 text-sm">Lancement de la section dédiée au jeu à 7, détection des profils hybrides.</p>
+              </div>
+              <div class="relative">
+                <div class="absolute -left-[34px] top-1 dot"></div>
+                <h4 class="font-extrabold">2022 — Montée en puissance</h4>
+                <p class="text-[var(--marine)]/70 text-sm">Méthodologie spécifique: charge, vitesse, prise de décision sous fatigue.</p>
+              </div>
+              <div class="relative">
+                <div class="absolute -left-[34px] top-1 dot"></div>
+                <h4 class="font-extrabold">2025 — Ambition Elite</h4>
+                <p class="text-[var(--marine)]/70 text-sm">Objectif clair: podium du circuit national et invitations internationales.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-3 gap-3 text-center">
+            <div class="p-4 rounded-2xl bg-white border border-black/5">
+              <div class="text-2xl font-extrabold text-[var(--bordeaux)]">+28%</div>
+              <div class="text-xs text-[var(--marine)]/60">Trys/match</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-black/5">
+              <div class="text-2xl font-extrabold text-[var(--bordeaux)]">-17%</div>
+              <div class="text-xs text-[var(--marine)]/60">Turnovers</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-black/5">
+              <div class="text-2xl font-extrabold text-[var(--bordeaux)]">92%</div>
+              <div class="text-xs text-[var(--marine)]/60">Plaquages</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="rounded-3xl overflow-hidden border border-black/5 bg-white">
+            <img src="https://placehold.co/960x620/eec0d9/1b1f33?text=UBB+Famille" alt="UBB Famille" class="w-full h-auto">
+            <div class="p-6">
+              <div class="flex items-center gap-3">
+                <i class="fa fa-hand-holding-heart text-[var(--bordeaux)] text-2xl"></i>
+                <h3 class="font-extrabold text-xl text-[var(--bordeaux)]">Valeurs</h3>
+              </div>
+              <p class="mt-2 text-[var(--marine)]/70">Respect, engagement, humilité. Une équipe ouverte et fière de ses supporters.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-sm">Formation</span>
+                <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-sm">Partage</span>
+                <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-sm">Ambition</span>
+                <span class="px-3 py-1 rounded-full bg-[var(--bordeaux)]/10 text-[var(--bordeaux)] text-sm">Collectif</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 rounded-3xl bg-gradient-to-r from-[var(--bordeaux)] to-[var(--marine)] text-white p-6 flex items-center justify-between">
+            <div>
+              <div class="text-sm uppercase tracking-wide text-white/80">Rejoignez la communauté</div>
+              <div class="font-extrabold text-2xl">UBB Sevens Club</div>
+            </div>
+            <a href="#newsletter" class="px-5 py-3 rounded-2xl bg-white text-[var(--marine)] font-semibold hover:opacity-90">S'inscrire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="relative py-20 bg-gradient-to-b from-[#fff5f7] to-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--bordeaux)]">Questions fréquentes</h2>
+        <p class="text-[var(--marine)]/70 mt-2">Tout savoir sur le format, les règles et l'expérience stade.</p>
+      </div>
+      <div class="mt-8 grid md:grid-cols-2 gap-6">
+        <details class="group rounded-2xl bg-white border border-black/5 p-5 reveal">
+          <summary class="flex cursor-pointer items-center justify-between">
+            <span class="font-bold">Qu'est-ce que le rugby à 7 ?</span>
+            <i class="fa fa-plus group-open:fa-minus"></i>
+          </summary>
+          <p class="mt-3 text-[var(--marine)]/70">Une variante du rugby à XV avec 7 joueurs, deux mi-temps de 7 minutes, un jeu rapide et spectaculaire où chaque possession compte.</p>
+        </details>
+        <details class="group rounded-2xl bg-white border border-black/5 p-5 reveal">
+          <summary class="flex cursor-pointer items-center justify-between">
+            <span class="font-bold">Puis-je venir en famille ?</span>
+            <i class="fa fa-plus group-open:fa-minus"></i>
+          </summary>
+          <p class="mt-3 text-[var(--marine)]/70">Oui, des espaces dédiés familles et une fan zone avec animations sont prévus avant et entre les matchs.</p>
+        </details>
+        <details class="group rounded-2xl bg-white border border-black/5 p-5 reveal">
+          <summary class="flex cursor-pointer items-center justify-between">
+            <span class="font-bold">Y a-t-il une équipe féminine ?</span>
+            <i class="fa fa-plus group-open:fa-minus"></i>
+          </summary>
+          <p class="mt-3 text-[var(--marine)]/70">Le pôle féminin Sevens se structure avec détections au printemps et matchs de gala programmés.</p>
+        </details>
+        <details class="group rounded-2xl bg-white border border-black/5 p-5 reveal">
+          <summary class="flex cursor-pointer items-center justify-between">
+            <span class="font-bold">Comment devenir partenaire ?</span>
+            <i class="fa fa-plus group-open:fa-minus"></i>
+          </summary>
+          <p class="mt-3 text-[var(--marine)]/70">Contactez notre cellule commerciale pour les offres hospitalités, naming d'événements et visibilités digitales.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section id="newsletter" class="relative py-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-[var(--crème)] via-white to-rose-50 -z-10"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-black/5 overflow-hidden">
+        <div class="grid md:grid-cols-2">
+          <div class="p-8 bg-gradient-to-br from-[var(--bordeaux)] to-[var(--marine)] text-white relative shine">
+            <div class="relative">
+              <h3 class="font-extrabold text-3xl">Restez connectés</h3>
+              <p class="mt-2 text-white/80">Les actus, inside training, offres billetterie et drops boutique en avant-première.</p>
+              <ul class="mt-4 space-y-2 text-sm">
+                <li class="flex items-center gap-2"><i class="fa fa-check text-yellow-300"></i> 1 à 2 emails / mois</li>
+                <li class="flex items-center gap-2"><i class="fa fa-check text-yellow-300"></i> Désinscription en un clic</li>
+                <li class="flex items-center gap-2"><i class="fa fa-check text-yellow-300"></i> Contenus exclusifs</li>
+              </ul>
+            </div>
+          </div>
+          <div class="p-8 bg-white">
+            <form class="grid gap-4">
+              <div>
+                <label class="text-sm font-bold">Votre email</label>
+                <input type="email" class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="vous@exemple.com">
+              </div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-sm font-bold">Prénom</label>
+                  <input class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="Alex">
+                </div>
+                <div>
+                  <label class="text-sm font-bold">Nom</label>
+                  <input class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="Dupont">
+                </div>
+              </div>
+              <div class="flex items-center gap-2 text-sm">
+                <input type="checkbox" class="w-4 h-4">
+                <span>J'accepte la politique de confidentialité</span>
+              </div>
+              <button class="px-5 py-3 rounded-2xl bg-gradient-to-r from-[var(--bordeaux)] to-[var(--marine)] text-white font-semibold hover:opacity-95">
+                S'abonner
+              </button>
+            </form>
+            <div class="mt-4 text-xs text-[var(--marine)]/60">Nous respectons vos données. Aucune revente à des tiers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Réseaux sociaux -->
+  <section class="relative py-10 bg-gradient-to-b from-white to-[var(--crème)]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl bg-white border border-black/5 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="text-center sm:text-left">
+          <div class="text-sm text-[var(--marine)]/60">Suivez-nous</div>
+          <div class="font-extrabold text-2xl text-[var(--bordeaux)]">UBB Sevens sur les réseaux</div>
+        </div>
+        <div class="flex items-center gap-3 text-xl">
+          <a href="#" class="w-12 h-12 rounded-2xl bg-[var(--marine)] text-white flex items-center justify-center hover:bg-[var(--bordeaux)] transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="w-12 h-12 rounded-2xl bg-[var(--marine)] text-white flex items-center justify-center hover:bg-[var(--bordeaux)] transition"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" class="w-12 h-12 rounded-2xl bg-[var(--marine)] text-white flex items-center justify-center hover:bg-[var(--bordeaux)] transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-12 h-12 rounded-2xl bg-[var(--marine)] text-white flex items-center justify-center hover:bg-[var(--bordeaux)] transition"><i class="fab fa-tiktok"></i></a>
+          <a href="#" class="w-12 h-12 rounded-2xl bg-[var(--marine)] text-white flex items-center justify-center hover:bg-[var(--bordeaux)] transition"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="relative py-16 bg-gradient-to-t from-white to-[#fff9fb]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-1">
+          <h3 class="text-2xl font-extrabold text-[var(--bordeaux)]">Contact</h3>
+          <p class="mt-2 text-[var(--marine)]/70">Une question, une demande presse ou partenariat ? Écrivez-nous.</p>
+          <div class="mt-6 space-y-3 text-[var(--marine)]/80">
+            <div class="flex items-center gap-3"><i class="fa fa-map-marker-alt text-[var(--bordeaux)]"></i> 1 Avenue du Stade, 33300 Bordeaux</div>
+            <div class="flex items-center gap-3"><i class="fa fa-envelope text-[var(--bordeaux)]"></i> sevens@ubb-rugby.fr</div>
+            <div class="flex items-center gap-3"><i class="fa fa-phone text-[var(--bordeaux)]"></i> +33 5 56 00 00 00</div>
+          </div>
+        </div>
+        <form class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="sm:col-span-1">
+            <label class="text-sm font-bold">Nom</label>
+            <input class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="Nom">
+          </div>
+          <div class="sm:col-span-1">
+            <label class="text-sm font-bold">Email</label>
+            <input type="email" class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="vous@exemple.com">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-sm font-bold">Sujet</label>
+            <input class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" placeholder="Objet de votre demande">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-sm font-bold">Message</label>
+            <textarea class="mt-1 w-full px-4 py-3 rounded-xl border border-black/10 focus:ring-2 focus:ring-[var(--bordeaux)]/40" rows="5" placeholder="Votre message..."></textarea>
+          </div>
+          <div class="sm:col-span-2 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-sm text-[var(--marine)]/70">
+              <input type="checkbox"> J'accepte la politique de confidentialité
+            </div>
+            <button class="px-5 py-3 rounded-2xl bg-gradient-to-r from-[var(--bordeaux)] to-[var(--marine)] text-white font-semibold hover:opacity-95">Envoyer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative bg-[var(--marine)] text-white pt-12 pb-8">
+    <div class="absolute inset-x-0 -top-8 h-8 bg-gradient-to-b from-black/20 to-transparent opacity-30"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--bordeaux)] to-[var(--rose)] text-[var(--marine)] font-extrabold flex items-center justify-center">7</div>
+            <div class="font-extrabold">UBB Sevens</div>
+          </div>
+          <p class="mt-3 text-white/70 text-sm">Le rugby à 7 aux couleurs bordeaux et marine: rapide, inspirant, spectaculaire.</p>
+          <div class="mt-4 flex gap-3 text-lg">
+            <a href="#" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="font-extrabold mb-3">Le Club</div>
+          <ul class="space-y-2 text-white/80 text-sm">
+            <li><a href="#club" class="hover:text-white">Identité &amp; valeurs</a></li>
+            <li><a href="#equipe" class="hover:text-white">Équipe &amp; staff</a></li>
+            <li><a href="#academie" class="hover:text-white">Académie</a></li>
+            <li><a href="#matchs" class="hover:text-white">Calendrier</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-extrabold mb-3">Fans</div>
+          <ul class="space-y-2 text-white/80 text-sm">
+            <li><a href="#billetterie" class="hover:text-white">Billetterie</a></li>
+            <li><a href="#boutique" class="hover:text-white">Boutique</a></li>
+            <li><a href="#newsletter" class="hover:text-white">Newsletter</a></li>
+            <li><a href="#video" class="hover:text-white">Vidéos</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-extrabold mb-3">Infos</div>
+          <ul class="space-y-2 text-white/80 text-sm">
+            <li><a href="#contact" class="hover:text-white">Contact</a></li>
+            <li><a href="#" class="hover:text-white">Mentions légales</a></li>
+            <li><a href="#" class="hover:text-white">Politique de confidentialité</a></li>
+            <li><a href="#" class="hover:text-white">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 border-t border-white/10 pt-4 text-sm text-white/70 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span>© 2025 UBB Sevens. Tous droits réservés.</span>
+        <span class="flex items-center gap-2"><i class="fa fa-leaf text-green-400"></i> Site éco-conçu: dark mode partiel, assets optimisés.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn && menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('hidden'));
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}
+      });
+    },{threshold:.12});
+    reveals.forEach(el=>io.observe(el));
+
+    // Ticket quantity calculator
+    const qty = document.getElementById('qty');
+    const minus = document.getElementById('minus');
+    const plus = document.getElementById('plus');
+    const total = document.getElementById('total');
+    const price = 18;
+    function updateTotal(){
+      const q = Math.max(1, Math.min(10, parseInt(qty.value || "1")));
+      qty.value = q;
+      total.textContent = (q*price) + " €";
+    }
+    minus && minus.addEventListener('click',()=>{qty.value = Math.max(1, (parseInt(qty.value)||1)-1);updateTotal();});
+    plus && plus.addEventListener('click',()=>{qty.value = Math.min(10, (parseInt(qty.value)||1)+1);updateTotal();});
+    qty && qty.addEventListener('input',updateTotal);
+    updateTotal();
+
+    // Magnetic buttons subtle effect
+    document.querySelectorAll('.magnet').forEach(btn=>{
+      const strength = 10;
+      btn.addEventListener('mousemove',e=>{
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        btn.style.transform = `translate(${x/strength}px, ${y/strength}px)`;
+      });
+      btn.addEventListener('mouseleave',()=>{btn.style.transform='translate(0,0)'});
+    });
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',function(e){
+        const id = this.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if(target){
+          e.preventDefault();
+          window.scrollTo({top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
